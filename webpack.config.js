@@ -1,4 +1,5 @@
 const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { NODE_ENV } = process.env
 
 const IN_PRODUCTION = NODE_ENV === 'production'
@@ -9,10 +10,18 @@ module.exports = {
   devtool: IN_PRODUCTION ? 'none' : 'inline-source-map',
   devServer: {
     static: './dist',
+    hot: true,
   },
-  plugins: [],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Todo-List',
+      template: './src/index.html',
+    }),
+  ],
   output: {
-    filename: 'main.js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
+    assetModuleFilename: 'images/[hash][ext][query]',
+    clean: true,
   },
 }
