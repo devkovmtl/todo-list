@@ -1,4 +1,6 @@
-async function hello() {
+import './styles/index.css'
+
+function hello() {
   return 'hello'
 }
 

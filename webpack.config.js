@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const { NODE_ENV } = process.env
 
 const IN_PRODUCTION = NODE_ENV === 'production'
@@ -15,6 +16,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       title: 'Todo-List',
       template: './src/index.html',
@@ -36,6 +38,10 @@ module.exports = {
             maxSize: 30 * 1024,
           },
         },
+      },
+      {
+        test: /\.(css|sass|scss)$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
       {
         test: /\.m?js$/,
