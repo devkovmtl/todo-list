@@ -4,11 +4,11 @@
   "description": "",
   "private": "true",
   "scripts": {
-    "clean": "rm -rf dist",
-    "watch": "webapck --watch",
+    "clean": "npx rimraf dist",
+    "watch": "webpack --watch",
     "start": "webpack serve --open",
-    "build": "webpack",
-    "build:dev": "set NODE_ENV=production && webpack"
+    "build": "npm run clean && npx cross-env NODE_ENV=production && webpack",
+    "build:dev": "webpack"
   },
   "author": "dev.kov.mtl@gmail.com",
   "devDependencies": {
