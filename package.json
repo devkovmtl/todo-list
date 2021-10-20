@@ -4,7 +4,16 @@
   "description": "",
   "private": "true",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "clean": "rm -rf dist",
+    "watch": "webapck --watch",
+    "start": "webpack serve --open",
+    "build": "webpack",
+    "build:dev": "set NODE_ENV=production && webpack"
   },
-  "author": "dev.kov.mtl@gmail.com"
+  "author": "dev.kov.mtl@gmail.com",
+  "devDependencies": {
+    "webpack": "^5.59.0",
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.3.1"
+  }
 }
