@@ -9,7 +9,7 @@ const IN_PRODUCTION = NODE_ENV === 'production'
 module.exports = {
   mode: IN_PRODUCTION ? 'production' : 'development',
   entry: './src/index.js',
-  devtool: IN_PRODUCTION ? 'none' : 'inline-source-map',
+  devtool: IN_PRODUCTION ? 'source-map' : 'inline-source-map',
   devServer: {
     static: './dist',
     hot: true,
@@ -27,6 +27,7 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     assetModuleFilename: 'images/[hash][ext][query]',
     clean: true,
+    library: 'MyLibrary',
   },
   module: {
     rules: [
