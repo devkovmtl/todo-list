@@ -13,6 +13,7 @@ class Todo {
     this.id = uuidV4()
     this.title = title
     this.description = description
+    this.createdAt = Date.now()
     this.dueDate = dueDate
     this.priority = priority
     this.notes = notes

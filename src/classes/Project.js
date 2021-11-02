@@ -5,6 +5,7 @@ class Project {
     this.id = uuidV4()
     this.name = name
     this.todoList = []
+    this.createdAt = Date.now()
   }
 
   getName() {

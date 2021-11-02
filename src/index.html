@@ -6,8 +6,309 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Todo List</title>
   </head>
-  <body>
-    <div id="root"></div>
+  <body id="body">
+    <!-- Main of Container -->
+    <div class="main-container h-full w-full relative md:flex">
+      <div
+        class="overlay bg-black opacity-40 h-full w-full absolute hidden"
+      ></div>
+
+      <!-- Side Navigation bar -->
+      <div
+        class="
+          side-nav
+          bg-gray-800
+          border-r-2 border-black
+          text-gray-400
+          w-60
+          h-full
+          overflow-x-hidden overflow-y-hidden
+          absolute
+          top-0
+          left-0
+          flex flex-col
+          justify-between
+          pt-6
+          transform
+          -translate-x-full
+          md:relative md:translate-x-0
+          transition
+          duration-200
+          ease-in-out
+        "
+      >
+        <div class="space-y-6">
+          <h2 class="text-center font-semibold text-2xl">Projects</h2>
+          <button
+            class="
+              block
+              mx-auto
+              py-2.5
+              px-7
+              mt-7
+              bg-red-400
+              rounded
+              text-gray-800 text-lg
+              font-semibold
+              shadow-md
+              hover:shadow-lg hover:bg-red-300
+              active:shadow-inner
+              transition
+              duration-200
+            "
+          >
+            + Add Project
+          </button>
+          <ul class="h-96 overflow-y-auto">
+            <li
+              class="
+                text-lg
+                p-2
+                pl-8
+                hover:cursor-pointer hover:text-white hover:underline
+              "
+            >
+              Default Project
+            </li>
+            <li class="text-lg p-2 pl-8 flex justify-between">
+              <button
+                class="hover:cursor-pointer hover:text-white hover:underline"
+              >
+                Project 1
+              </button>
+              <svg
+                class="
+                  w-6
+                  h-6
+                  hover:cursor-pointer
+                  hover:text-white
+                  hover:bg-gray-50
+                  hover:bg-opacity-10
+                  rounded-full
+                "
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+            </li>
+            <li class="text-lg p-2 pl-8 flex justify-between">
+              <button
+                class="hover:cursor-pointer hover:text-white hover:underline"
+              >
+                Project 1
+              </button>
+              <svg
+                class="
+                  w-6
+                  h-6
+                  hover:cursor-pointer
+                  hover:text-white
+                  hover:bg-gray-50
+                  hover:bg-opacity-10
+                  rounded-full
+                "
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+            </li>
+            <li class="text-lg p-2 pl-8 flex justify-between">
+              <button
+                class="hover:cursor-pointer hover:text-white hover:underline"
+              >
+                Project 1
+              </button>
+              <svg
+                class="
+                  w-6
+                  h-6
+                  hover:cursor-pointer
+                  hover:text-white
+                  hover:bg-gray-50
+                  hover:bg-opacity-10
+                  rounded-full
+                "
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+            </li>
+            <li class="text-lg p-2 pl-8 flex justify-between">
+              <button
+                class="hover:cursor-pointer hover:text-white hover:underline"
+              >
+                Project 1
+              </button>
+              <svg
+                class="
+                  w-6
+                  h-6
+                  hover:cursor-pointer
+                  hover:text-white
+                  hover:bg-gray-50
+                  hover:bg-opacity-10
+                  rounded-full
+                "
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+            </li>
+          </ul>
+        </div>
+        <div class="flex flex-col pb-6 pt-4 space-y-1 border-t-4 hidden">
+          <a
+            href="#"
+            class="
+              text-lg
+              p-2
+              pl-8
+              hover:cursor-pointer hover:text-white hover:underline
+            "
+            >Login</a
+          >
+          <a
+            href="#"
+            class="
+              text-lg
+              p-2
+              pl-8
+              hover:cursor-pointer hover:text-white hover:underline
+            "
+            >Register</a
+          >
+        </div>
+      </div>
+      <!-- End of side nav -->
+
+      <div class="h-full flex-1">
+        <!-- NavBar -->
+        <div
+          class="
+            top-nav
+            bg-gray-800
+            text-gray-300
+            w-full
+            h-20
+            flex
+            items-center
+            px-8
+            pr-4
+            drop-shadow-lg
+            z-10
+          "
+        >
+          <a href="#" class="text-white font-bold text-4xl">Brand</a>
+          <span class="flex-1"></span>
+          <div class="hidden space-x-4">
+            <a href="#" class="hover:text-white">Log In</a>
+            <a href="#" class="hover:text-white">Register</a>
+          </div>
+          <button class="btnMenuNav border-2 p-1 rounded-md md:hidden">
+            <svg
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Main Content -->
+        <div
+          class="
+            main-content-container
+            bg-gray-100
+            h-full
+            w-full
+            py-3
+            transition
+            duration-200
+            ease-in-out
+            space-y-4
+          "
+        >
+          <!-- Row  -->
+          <div
+            class="
+              space-y-2
+              max-w-2xl
+              mx-auto
+              sm:flex sm:justify-between sm:items-center sm:space-y-0
+            "
+          >
+            <h3 class="text-xl font-medium p-4">Project Name</h3>
+            <button
+              class="
+                border-2 border-gray-400
+                px-4
+                mr-4
+                py-3
+                rounded-md
+                hover:border-transparent hover:bg-gray-400 hover:text-white
+                ml-4
+              "
+            >
+              + Add Todo
+            </button>
+          </div>
+
+          <!-- Contains the list Todo -->
+          <div
+            class="
+              h-full
+              overflow-y-auto
+              w-full
+              pb-52
+              space-y-3
+              sm:pb-48
+              lg:grid lg:grid-cols-2
+            "
+          ></div>
+        </div>
+      </div>
+    </div>
+    <!-- End of Container -->
     <script src="index.js"></script>
   </body>
 </html>
