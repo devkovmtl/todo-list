@@ -282,6 +282,7 @@
             <h3 class="text-xl font-medium p-4">Project Name</h3>
             <button
               class="
+                add-btn-todo
                 border-2 border-gray-400
                 px-4
                 mr-4
@@ -396,7 +397,7 @@
     </div>
     <!-- End of Container -->
 
-    <!-- PROJECT MODEL -->
+    <!-- Project Modal creation -->
     <div
       class="
         project-modal
@@ -415,7 +416,7 @@
         class="
           modal-content
           bg-white
-          mt-16
+          mt-20
           mx-auto
           p-6
           max-w-sm
@@ -437,24 +438,146 @@
             />
           </div>
 
-          <div class="container flex justify-end">
+          <div class="container flex justify-end space-x-2">
+            <button
+              class="
+                cancel-btn-project
+                bg-gray-400
+                text-gray-800
+                px-6
+                py-3
+                rounded-md
+                hover:cursor-pointer hover:bg-gray-300
+                transition
+                duration-200
+              "
+            >
+              Cancel
+            </button>
             <input
               type="submit"
               value="Submit"
               class="
                 submit-btn-project
                 bg-green-600
+                text-gray-800
                 px-6
                 py-3
                 rounded-md
                 shadow-md
                 hover:cursor-pointer hover:bg-green-400
+                transition
+                duration-200
               "
             />
           </div>
         </form>
       </div>
     </div>
+    <!-- End of Project Modal -->
+
+    <!-- TODO Modal creation -->
+    <div
+      class="
+        todo-modal
+        z-40
+        fixed
+        left-0
+        top-0
+        w-full
+        h-full
+        overflow-auto
+        bg-black bg-opacity-40
+        hidden
+      "
+    >
+      <div
+        class="
+          modal-content
+          bg-white
+          mt-14
+          mx-auto
+          p-6
+          max-w-sm
+          border-2 border-gray-800
+          space-y-8
+          shadow-lg
+          rounded-md
+        "
+      >
+        <h3 class="text-black text-2xl">Add A Todo</h3>
+        <form class="space-y-5" name="project-form">
+          <div class="container w-full space-y-3">
+            <input
+              type="text"
+              placeholder="Title"
+              name="title"
+              required
+              class="w-full rounded-md border-2 border-black py-3 px-2"
+            />
+            <input
+              type="text"
+              placeholder="Description"
+              name="description"
+              class="w-full rounded-md border-2 border-black py-3 px-2"
+            />
+
+            <input
+              type="date"
+              name="dueDate"
+              id="dueDate"
+              class="w-full rounded-md border-black border-2 py-3 px-2"
+            />
+
+            <select
+              name="priority"
+              id="priority"
+              value="low"
+              class="w-full rounded-md border-2 border-black py-3 px-2"
+            >
+              <option value="low">LOW</option>
+              <option value="medium">MEDIUM</option>
+              <option value="high">HIGH</option>
+            </select>
+          </div>
+
+          <div class="container flex justify-end space-x-2">
+            <button
+              class="
+                cancel-btn-todo
+                bg-gray-400
+                text-gray-800
+                px-6
+                py-3
+                rounded-md
+                hover:cursor-pointer hover:bg-gray-300
+                transition
+                duration-200
+              "
+            >
+              Cancel
+            </button>
+            <input
+              type="submit"
+              value="Submit"
+              class="
+                submit-btn-todo
+                bg-green-600
+                text-gray-800
+                px-6
+                py-3
+                rounded-md
+                shadow-md
+                hover:cursor-pointer hover:bg-green-400
+                transition
+                duration-200
+              "
+            />
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- End of Todo Modal -->
     <script src="index.js"></script>
   </body>
 </html>
