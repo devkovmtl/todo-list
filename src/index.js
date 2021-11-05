@@ -1,4 +1,6 @@
 import './styles/index.css'
+import { App, Project, Todo } from './classes'
+import { DEFAULT_PROJECT } from './constants'
 
 const btnMenuNav = document.querySelector('.btnMenuNav')
 const sideNav = document.querySelector('.side-nav')
@@ -13,6 +15,13 @@ const addBtnTodo = document.querySelector('.add-btn-todo')
 const todoModal = document.querySelector('.todo-modal')
 const submitBtnTodo = document.querySelector('.submit-btn-todo')
 const cancelBtnTodo = document.querySelector('.cancel-btn-todo')
+
+const projectForm = document.querySelector('.project-form')
+const todoForm = document.querySelector('.todo-form')
+
+const defaultProject = new Project(DEFAULT_PROJECT)
+const app = new App()
+app.addProject(defaultProject)
 
 btnMenuNav.addEventListener('click', (e) => {
   sideNav.classList.toggle('-translate-x-full')
@@ -47,6 +56,25 @@ submitBtnTodo.addEventListener('click', (e) => {
   todoModal.classList.add('hidden')
 })
 
+projectForm.addEventListener('submit', addProject)
+
+function addProject(e) {
+  e.preventDefault()
+  const projectName = this.querySelector('[name=name]').value
+  if (!projectName) {
+    alert('Project Name is required')
+    console.log('Project Name is required')
+    return
+  }
+  const project = new Project(projectName)
+  console.log('Project created', project)
+  app.addProject(project)
+  console.log(app)
+  projectModal.classList.add('hidden')
+}
+
+// console.log(app)ssss
+
 // body.innerHTML += `
 // <header class="flex items-center justify-between">
 // <h2 class="text-lg leading-6 font-medium bg-gray-900 text-green-500">Projects test</h2>
@@ -55,8 +83,6 @@ submitBtnTodo.addEventListener('click', (e) => {
 // import { App, Todo, Project } from './classes'
 
 // const root = document.querySelector('#root')
-
-// const app = new App()
 
 // function appInitialization() {
 //   const project = new Project('Default Project')
