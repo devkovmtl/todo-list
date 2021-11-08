@@ -16,12 +16,33 @@ const todoModal = document.querySelector('.todo-modal')
 const submitBtnTodo = document.querySelector('.submit-btn-todo')
 const cancelBtnTodo = document.querySelector('.cancel-btn-todo')
 
+const projectList = document.querySelector('.project-list')
+
 const projectForm = document.querySelector('.project-form')
 const todoForm = document.querySelector('.todo-form')
 
 const defaultProject = new Project(DEFAULT_PROJECT)
+
 const app = new App()
 app.addProject(defaultProject)
+app.setDefaultProject(defaultProject)
+app.setSelectedProject(defaultProject)
+
+projectList.innerHTML += `
+  <li
+  class="
+    text-lg
+    p-2
+    pl-8
+  "
+  id="projectID#${defaultProject.id}"
+  >
+  <button
+  class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
+>
+  ${DEFAULT_PROJECT}</button>
+  </li>
+`
 
 btnMenuNav.addEventListener('click', (e) => {
   sideNav.classList.toggle('-translate-x-full')
@@ -56,21 +77,109 @@ submitBtnTodo.addEventListener('click', (e) => {
   todoModal.classList.add('hidden')
 })
 
+projectList.addEventListener('click', (e) => {
+  if (!e.target.matches('button')) return
+  if (e.target.classList.contains('select-project-btn')) {
+    const liId = e.target.parentElement.id
+    setAppSelectedProject(liId.split('#')[1])
+  }
+  if (e.target.classList.contains('delete-project-btn')) {
+    const liId = e.target.parentElement.id
+    delectProjectFromApp(liId.split('#')[1])
+  }
+})
+
 projectForm.addEventListener('submit', addProject)
+todoForm.addEventListener('submit', addTodo)
+
+function setAppSelectedProject(projectId) {
+  console.log(projectId)
+  const project = app.getProjectById(projectId)
+  app.setSelectedProject(project)
+  console.log(app)
+}
+
+function delectProjectFromApp(projectId) {
+  const confirm = window.confirm(
+    'Are you sure you want to delete this project?'
+  )
+  if (!confirm) return
+
+  app.deleteProjectById(projectId)
+
+  projectList.innerHTML = ''
+  projectList.innerHTML = app.projects
+    .map((project, i) => {
+      if (project.name === DEFAULT_PROJECT) {
+        return `
+      <li
+      id="projectID#${project.id}"s
+      class="
+        text-lg
+        p-2
+        pl-8
+        hover:cursor-pointer hover:text-white hover:underlines
+      "
+    >
+      ${project.name}
+    </li>
+      `
+      }
+      return `
+      <li class="text-lg p-2 pl-8 flex justify-between" id="projectID#${project.id}">
+        <button
+          class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
+        >
+          ${project.name}
+        </button>
+        <button class="delete-project-btn
+        hover:cursor-pointer
+        hover:text-white
+        hover:bg-gray-50
+        hover:bg-opacity-10
+        p-2
+        rounded-full">
+        🗑
+        </button>
+      </li>
+    `
+    })
+    .join('')
+}
 
 function addProject(e) {
   e.preventDefault()
   const projectName = this.querySelector('[name=name]').value
   if (!projectName) {
     alert('Project Name is required')
-    console.log('Project Name is required')
     return
   }
   const project = new Project(projectName)
-  console.log('Project created', project)
   app.addProject(project)
-  console.log(app)
   projectModal.classList.add('hidden')
+
+  projectList.innerHTML += `
+  <li class="text-lg p-2 pl-8 flex justify-between" id="projectID#${project.id}">
+    <button
+      class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
+    >
+      ${project.name}
+    </button>
+    <button class="delete-project-btn
+    hover:cursor-pointer
+    hover:text-white
+    hover:bg-gray-50
+    hover:bg-opacity-10
+    p-2
+    rounded-full">
+    🗑
+    </button>
+  </li>
+  `
+}
+
+function addTodo(e) {
+  alert(e)
 }
 
 // console.log(app)ssss

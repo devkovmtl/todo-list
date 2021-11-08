@@ -1,6 +1,24 @@
 class App {
   constructor() {
     this.projects = []
+    this.defaultProject = null
+    this.selectedProject = null
+  }
+
+  setDefaultProject(project) {
+    this.defaultProject = project
+  }
+
+  getDefaultProject() {
+    return this.defaultProject
+  }
+
+  setSelectedProject(project) {
+    this.selectedProject = project
+  }
+
+  getSelectedProject() {
+    return this.selectedProject
   }
 
   addProject(project) {
@@ -16,7 +34,7 @@ class App {
   }
 
   deleteProjectById(projectId) {
-    return this.projects.filter((p) => p.id !== projectId)
+    this.projects = this.projects.filter((p) => p.id !== projectId)
   }
 }
 
