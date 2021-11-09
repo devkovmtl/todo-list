@@ -109,6 +109,12 @@ function delectProjectFromApp(projectId) {
 
   app.deleteProjectById(projectId)
 
+  if (projectId === app.getSelectedProject().id) {
+    const defaultProject = app.getDefaultProject()
+    app.setSelectedProject(defaultProject)
+    projectTitleName.innerHTML = `${app.getSelectedProject().name}`
+  }
+
   populateProjectList(app.projects)
 }
 
