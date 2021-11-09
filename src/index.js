@@ -20,6 +20,7 @@ const projectList = document.querySelector('.project-list')
 
 const projectForm = document.querySelector('.project-form')
 const todoForm = document.querySelector('.todo-form')
+const projectTitleName = document.querySelector('.project-title-name')
 
 const defaultProject = new Project(DEFAULT_PROJECT)
 
@@ -27,7 +28,7 @@ const app = new App()
 app.addProject(defaultProject)
 app.setDefaultProject(defaultProject)
 app.setSelectedProject(defaultProject)
-
+projectTitleName.innerHTML = `${app.getSelectedProject().name}`
 projectList.innerHTML += `
   <li
   class="
@@ -97,6 +98,7 @@ function setAppSelectedProject(projectId) {
   const project = app.getProjectById(projectId)
   app.setSelectedProject(project)
   console.log(app)
+  projectTitleName.innerHTML = `${app.getSelectedProject().name}`
 }
 
 function delectProjectFromApp(projectId) {
@@ -107,8 +109,43 @@ function delectProjectFromApp(projectId) {
 
   app.deleteProjectById(projectId)
 
+  populateProjectList(app.projects)
+}
+
+function addProject(e) {
+  e.preventDefault()
+  const projectName = this.querySelector('[name=name]').value
+  if (!projectName) {
+    return
+  }
+  const project = new Project(projectName)
+  app.addProject(project)
+  projectModal.classList.add('hidden')
+
+  // projectList.innerHTML += `
+  // <li class="text-lg p-2 pl-8 flex justify-between" id="projectID#${project.id}">
+  //   <button
+  //     class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
+  //   >
+  //     ${project.name}
+  //   </button>
+  //   <button class="delete-project-btn
+  //   hover:cursor-pointer
+  //   hover:text-white
+  //   hover:bg-gray-50
+  //   hover:bg-opacity-10
+  //   p-2
+  //   rounded-full">
+  //   🗑
+  //   </button>
+  // </li>
+  // `
+  populateProjectList(app.projects)
+}
+
+function populateProjectList(projects = []) {
   projectList.innerHTML = ''
-  projectList.innerHTML = app.projects
+  projectList.innerHTML = projects
     .map((project, i) => {
       if (project.name === DEFAULT_PROJECT) {
         return `
@@ -118,10 +155,13 @@ function delectProjectFromApp(projectId) {
         text-lg
         p-2
         pl-8
-        hover:cursor-pointer hover:text-white hover:underlines
       "
     >
+      <button
+      class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
+    >
       ${project.name}
+    </button>
     </li>
       `
       }
@@ -145,37 +185,6 @@ function delectProjectFromApp(projectId) {
     `
     })
     .join('')
-}
-
-function addProject(e) {
-  e.preventDefault()
-  const projectName = this.querySelector('[name=name]').value
-  if (!projectName) {
-    alert('Project Name is required')
-    return
-  }
-  const project = new Project(projectName)
-  app.addProject(project)
-  projectModal.classList.add('hidden')
-
-  projectList.innerHTML += `
-  <li class="text-lg p-2 pl-8 flex justify-between" id="projectID#${project.id}">
-    <button
-      class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
-    >
-      ${project.name}
-    </button>
-    <button class="delete-project-btn
-    hover:cursor-pointer
-    hover:text-white
-    hover:bg-gray-50
-    hover:bg-opacity-10
-    p-2
-    rounded-full">
-    🗑
-    </button>
-  </li>
-  `
 }
 
 function addTodo(e) {
