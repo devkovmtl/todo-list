@@ -21,6 +21,7 @@ const projectList = document.querySelector('.project-list')
 const projectForm = document.querySelector('.project-form')
 const todoForm = document.querySelector('.todo-form')
 const projectTitleName = document.querySelector('.project-title-name')
+const containerTodoList = document.querySelector('.container-todo-list')
 
 const defaultProject = new Project(DEFAULT_PROJECT)
 
@@ -99,6 +100,7 @@ function setAppSelectedProject(projectId) {
   app.setSelectedProject(project)
   console.log(app)
   projectTitleName.innerHTML = `${app.getSelectedProject().name}`
+  populateTodoList(project.todoList)
 }
 
 function delectProjectFromApp(projectId) {
@@ -194,7 +196,119 @@ function populateProjectList(projects = []) {
 }
 
 function addTodo(e) {
-  alert(e)
+  e.preventDefault()
+  const title = this.querySelector('[name=title]').value
+  const description = this.querySelector('[name=description]').value
+  const dueDate = this.querySelector('[name=dueDate]').value
+  const priority = this.querySelector('[name=priority]').value
+
+  if (!title) {
+    document.alert('Title is required')
+    return
+  }
+  const todo = new Todo(
+    title,
+    description,
+    new Date(dueDate) || Date.now(),
+    priority
+  )
+  // get the current selected project
+  const selectedProject = app.getSelectedProject()
+  console.log(selectedProject)
+  selectedProject.addTodoToProject(todo)
+  populateTodoList(selectedProject.todoList)
+  todoModal.classList.add('hidden')
+}
+
+function populateTodoList(todos = []) {
+  console.log(todos)
+  containerTodoList.innerHTML = ''
+  containerTodoList.innerHTML = todos.map((todo, i) => {
+    return `
+    <!-- TODO CARD -->
+    <div
+      id="${todo.id}"
+      class="
+        todo
+        h
+        bg-white
+        border-2 border-gray-400
+        p-1
+        max-w-sm
+        rounded-md
+        flex flex-col
+        mx-auto
+        shadow-md
+      "
+    >
+      <div class="flex justify-between space-x-5 items-center">
+        <h3 class="text-lg font-medium p-2 flex-1 bg-white">
+          ${todo.title}
+        </h3>
+        <div class="flex flex-col items-end space-y-2 p-2">
+          <p class="text-base font-light">${todo.priority}</p>
+          <p class="text-xs font-extralight">2021-11-03</p>
+        </div>
+      </div>
+      <div class="p-3 text-base font-light">
+        <p>
+        ${todo.description}
+        </p>
+      </div>
+      <div class="flex justify-between px-6 py-1">
+        <button
+          class="
+            hover:bg-green-400 hover:bg-opacity-25 hover:text-green-700
+            p-2
+            rounded-full
+            transition
+            duration-150
+          "
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M5 13l4 4L19 7"
+            ></path>
+          </svg>
+        </button>
+        <button
+          class="
+            hover:bg-red-400 hover:bg-opacity-25 hover:text-red-700
+            p-2
+            rounded-full
+            transition
+            duration-150
+          "
+        >
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+    <!-- End OF TODO CARD -->
+    `
+  })
 }
 
 // console.log(app)ssss
