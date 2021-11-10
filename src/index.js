@@ -26,6 +26,7 @@ const containerTodoList = document.querySelector('.container-todo-list')
 const defaultProject = new Project(DEFAULT_PROJECT)
 
 const app = new App()
+
 app.addProject(defaultProject)
 app.setDefaultProject(defaultProject)
 app.setSelectedProject(defaultProject)
@@ -94,7 +95,7 @@ projectList.addEventListener('click', (e) => {
 containerTodoList.addEventListener('click', (e) => {
   if (!e.target.matches('button')) return
   if (e.target.classList.contains('confirm-todo-btn')) {
-    // console.log(e.target.classList)
+    //
     const divId = e.target.parentElement.parentElement.id
     const todoList = app.getSelectedProject().getTodoList()
     const todo = todoList.find((el) => el.id === divId)
@@ -102,7 +103,7 @@ containerTodoList.addEventListener('click', (e) => {
     populateTodoList(app.getSelectedProject().getTodoList())
   }
   if (e.target.classList.contains('delete-todo-btn')) {
-    // console.log(e.target.classList)
+    //
     const divId = e.target.parentElement.parentElement.id
     app.getSelectedProject().removeTodofromProject(divId)
     populateTodoList(app.getSelectedProject().getTodoList())
@@ -113,10 +114,9 @@ projectForm.addEventListener('submit', addProject)
 todoForm.addEventListener('submit', addTodo)
 
 function setAppSelectedProject(projectId) {
-  console.log(projectId)
   const project = app.getProjectById(projectId)
   app.setSelectedProject(project)
-  console.log(app)
+
   projectTitleName.innerHTML = `${app.getSelectedProject().name}`
   populateTodoList(project.todoList)
 }
@@ -147,25 +147,6 @@ function addProject(e) {
   const project = new Project(projectName)
   app.addProject(project)
   projectModal.classList.add('hidden')
-
-  // projectList.innerHTML += `
-  // <li class="text-lg p-2 pl-8 flex justify-between" id="projectID#${project.id}">
-  //   <button
-  //     class="select-project-btn hover:cursor-pointer hover:text-white hover:underline"
-  //   >
-  //     ${project.name}
-  //   </button>
-  //   <button class="delete-project-btn
-  //   hover:cursor-pointer
-  //   hover:text-white
-  //   hover:bg-gray-50
-  //   hover:bg-opacity-10
-  //   p-2
-  //   rounded-full">
-  //   🗑
-  //   </button>
-  // </li>
-  // `
   populateProjectList(app.projects)
 }
 
@@ -233,17 +214,15 @@ function addTodo(e) {
   )
   // get the current selected project
   const selectedProject = app.getSelectedProject()
-  console.log(selectedProject)
+
   selectedProject.addTodoToProject(todo)
   populateTodoList(selectedProject.todoList)
   todoModal.classList.add('hidden')
 }
 
 function populateTodoList(todos = []) {
-  console.log(todos)
   containerTodoList.innerHTML = ''
   containerTodoList.innerHTML = todos.map((todo, i) => {
-    console.log(todo)
     return `
     <!-- TODO CARD -->
     <div
