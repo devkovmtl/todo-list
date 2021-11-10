@@ -91,6 +91,24 @@ projectList.addEventListener('click', (e) => {
   }
 })
 
+containerTodoList.addEventListener('click', (e) => {
+  if (!e.target.matches('button')) return
+  if (e.target.classList.contains('confirm-todo-btn')) {
+    // console.log(e.target.classList)
+    const divId = e.target.parentElement.parentElement.id
+    const todoList = app.getSelectedProject().getTodoList()
+    const todo = todoList.find((el) => el.id === divId)
+    todo.setIsDone(!todo.getIsDone())
+    populateTodoList(app.getSelectedProject().getTodoList())
+  }
+  if (e.target.classList.contains('delete-todo-btn')) {
+    // console.log(e.target.classList)
+    const divId = e.target.parentElement.parentElement.id
+    app.getSelectedProject().removeTodofromProject(divId)
+    populateTodoList(app.getSelectedProject().getTodoList())
+  }
+})
+
 projectForm.addEventListener('submit', addProject)
 todoForm.addEventListener('submit', addTodo)
 
@@ -210,7 +228,8 @@ function addTodo(e) {
     title,
     description,
     new Date(dueDate) || Date.now(),
-    priority
+    priority,
+    false
   )
   // get the current selected project
   const selectedProject = app.getSelectedProject()
@@ -224,14 +243,14 @@ function populateTodoList(todos = []) {
   console.log(todos)
   containerTodoList.innerHTML = ''
   containerTodoList.innerHTML = todos.map((todo, i) => {
+    console.log(todo)
     return `
     <!-- TODO CARD -->
     <div
       id="${todo.id}"
       class="
         todo
-        h
-        bg-white
+        ${todo.isDone ? 'bg-green-100' : ''}
         border-2 border-gray-400
         p-1
         max-w-sm
@@ -242,12 +261,22 @@ function populateTodoList(todos = []) {
       "
     >
       <div class="flex justify-between space-x-5 items-center">
-        <h3 class="text-lg font-medium p-2 flex-1 bg-white">
+        <h3 class="text-lg font-medium p-2 flex-1 ${
+          todo.isDone ? 'line-through' : ''
+        }">
           ${todo.title}
         </h3>
         <div class="flex flex-col items-end space-y-2 p-2">
-          <p class="text-base font-light">${todo.priority}</p>
-          <p class="text-xs font-extralight">2021-11-03</p>
+          <p class="text-base font-light uppercase ${
+            todo.priority === 'low'
+              ? 'text-blue-500'
+              : todo.priority === 'medium'
+              ? 'text-yellow-500'
+              : 'text-red-500'
+          } ${todo.isDone ? 'line-through' : ''}">${todo.priority}</p>
+          <p class="text-xs font-extralight ${
+            todo.isDone ? 'line-through' : ''
+          }">${todo.dueDate.toLocaleDateString()}</p>
         </div>
       </div>
       <div class="p-3 text-base font-light">
@@ -286,26 +315,3 @@ function populateTodoList(todos = []) {
     `
   })
 }
-
-// console.log(app)ssss
-
-// body.innerHTML += `
-// <header class="flex items-center justify-between">
-// <h2 class="text-lg leading-6 font-medium bg-gray-900 text-green-500">Projects test</h2>
-// </header>
-// `
-// import { App, Todo, Project } from './classes'
-
-// const root = document.querySelector('#root')
-
-// function appInitialization() {
-//   const project = new Project('Default Project')
-
-//   const newTodo = new Todo('My New Todo', 'Some new Description')
-//   project.addTodoToProject(newTodo)
-
-//   app.addProject(project)
-// }
-
-// ;(() => appInitialization())()
-// console.log(app)

@@ -7,6 +7,7 @@ class Todo {
     description = 'Default Description',
     dueDate = Date.now(),
     priority = PRIORITY[0],
+    isDone = false,
     notes = '',
     checklist = []
   ) {
@@ -16,6 +17,7 @@ class Todo {
     this.createdAt = Date.now()
     this.dueDate = dueDate
     this.priority = priority
+    this.isDone = isDone
     this.notes = notes
     this.checklist = checklist
   }
@@ -34,6 +36,14 @@ class Todo {
 
   setDescription(description) {
     this.description = description
+  }
+
+  getIsDone() {
+    return this.isDone
+  }
+
+  setIsDone(val) {
+    this.isDone = val
   }
 
   getDueDate() {
